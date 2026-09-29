@@ -1,0 +1,40 @@
+# Speech Emotion Detection — Python Dependencies
+# Install with: pip install -r requirements.txt
+#
+# Python version: 3.10+
+# Tested on: Python 3.14.3
+
+# ─── Audio processing ─────────────────────────────────────────────
+librosa>=0.10.0           # Audio loading, MFCC, spectral features
+soundfile>=0.12.0         # Fast WAV/FLAC reading
+numpy>=1.24.0             # Numerical arrays
+scipy>=1.10.0             # Signal processing utilities
+imageio-ffmpeg>=0.4.9     # Bundled ffmpeg binary — required to decode browser WebM/Opus on Windows
+
+# ─── Machine Learning ─────────────────────────────────────────────
+scikit-learn>=1.2.0       # SVM, Random Forest, preprocessing, metrics
+joblib>=1.2.0             # Model serialization (load/save)
+
+# ─── Data analysis & visualization ────────────────────────────────
+pandas>=2.0.0             # DataFrame handling
+matplotlib>=3.7.0         # Plots and charts
+seaborn>=0.12.0           # Enhanced visualization
+
+# ─── Backend (FastAPI) ────────────────────────────────────────────
+fastapi>=0.100.0          # Web framework
+uvicorn>=0.22.0           # ASGI server
+python-multipart>=0.0.6   # File upload support
+aiofiles>=23.0.0          # Async file handling
+pydub>=0.25.0             # Audio format conversion (for WebM handling)
+
+# ─── HTTP client (for tests) ──────────────────────────────────────
+httpx>=0.24.0             # HTTP client (used by FastAPI TestClient)
+requests>=2.31.0          # Simple HTTP requests
+
+# ─── Testing ──────────────────────────────────────────────────────
+pytest>=7.4.0             # Test framework
+pytest-asyncio>=0.21.0    # Async test support
+
+# ─── Optional (for report generation) ────────────────────────────
+# reportlab>=4.0.0        # PDF generation (uncomment if needed)
+# python-docx>=0.8.11     # Word document generation (uncomment if needed)

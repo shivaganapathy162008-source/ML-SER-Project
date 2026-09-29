@@ -1,0 +1,172 @@
+2026-09-27 18:00:16,045 - INFO - 🎙️ Speech Emotion Detection — Training Pipeline
+2026-09-27 18:00:16,045 - INFO - Started at: 2026-09-27 18:00:16
+2026-09-27 18:00:16,045 - INFO - Random seed: 42
+2026-09-27 18:00:16,045 - INFO - 
+[STEP 1] Loading dataset...
+2026-09-27 18:00:16,110 - INFO - Dataset loaded: 1440 audio files across 24 speakers.
+2026-09-27 18:00:16,110 - INFO - Loaded 1440 audio files, 8 emotions, 24 speakers
+2026-09-27 18:00:16,111 - INFO - Emotions in dataset: ['Angry', 'Calm', 'Disgust', 'Fearful', 'Happy', 'Neutral', 'Sad', 'Surprised']
+2026-09-27 18:00:16,111 - INFO - 
+[STEP 2] Splitting dataset (speaker-independent)...
+2026-09-27 18:00:16,111 - INFO - Speaker split -> Train: [np.int64(1), np.int64(4), np.int64(6), np.int64(7), np.int64(8), np.int64(10), np.int64(11), np.int64(12), np.int64(13), np.int64(16), np.int64(17), np.int64(18), np.int64(19), np.int64(20), np.int64(21), np.int64(24)] (16 speakers), Val: [np.int64(3), np.int64(5), np.int64(15), np.int64(23)] (4 speakers), Test: [np.int64(2), np.int64(9), np.int64(14), np.int64(22)] (4 speakers)
+2026-09-27 18:00:16,112 - INFO - Split sizes -> Train: 960, Val: 240, Test: 240
+2026-09-27 18:00:16,113 - INFO - Train: 960, Val: 240, Test: 240
+2026-09-27 18:00:16,113 - INFO - 
+[STEP 3] Extracting features (with data augmentation on train set)...
+2026-09-27 18:00:16,113 - INFO - New feature dimension: 560 (was 192 — now 560 with rich features)
+2026-09-27 18:00:16,113 - INFO - Extracting augmented features for train set (960 files× 4 aug)...
+2026-09-27 18:00:41,188 - INFO -   Processed 50/960 files (0 failed, 200 samples so far)...
+2026-09-27 18:01:06,514 - INFO -   Processed 100/960 files (0 failed, 400 samples so far)...
+2026-09-27 18:01:37,459 - INFO -   Processed 150/960 files (0 failed, 600 samples so far)...
+2026-09-27 18:02:09,581 - INFO -   Processed 200/960 files (0 failed, 800 samples so far)...
+2026-09-27 18:02:40,257 - INFO -   Processed 250/960 files (0 failed, 1000 samples so far)...
+2026-09-27 18:03:09,855 - INFO -   Processed 300/960 files (0 failed, 1200 samples so far)...
+2026-09-27 18:03:39,424 - INFO -   Processed 350/960 files (0 failed, 1400 samples so far)...
+2026-09-27 18:04:08,419 - INFO -   Processed 400/960 files (0 failed, 1600 samples so far)...
+2026-09-27 18:04:38,852 - INFO -   Processed 450/960 files (0 failed, 1800 samples so far)...
+2026-09-27 18:05:11,173 - INFO -   Processed 500/960 files (0 failed, 2000 samples so far)...
+2026-09-27 18:05:42,616 - INFO -   Processed 550/960 files (0 failed, 2200 samples so far)...
+2026-09-27 18:06:13,679 - INFO -   Processed 600/960 files (0 failed, 2400 samples so far)...
+2026-09-27 18:06:41,789 - INFO -   Processed 650/960 files (0 failed, 2600 samples so far)...
+2026-09-27 18:07:09,010 - INFO -   Processed 700/960 files (0 failed, 2800 samples so far)...
+2026-09-27 18:07:36,549 - INFO -   Processed 750/960 files (0 failed, 3000 samples so far)...
+2026-09-27 18:08:02,404 - INFO -   Processed 800/960 files (0 failed, 3200 samples so far)...
+2026-09-27 18:09:12,539 - INFO -   Processed 850/960 files (0 failed, 3400 samples so far)...
+2026-09-27 18:10:25,405 - INFO -   Processed 900/960 files (0 failed, 3600 samples so far)...
+2026-09-27 18:59:47,198 - INFO -   Processed 950/960 files (0 failed, 3800 samples so far)...
+2026-09-27 18:59:52,620 - INFO -   Processed 960/960 files (0 failed, 3840 samples so far)...
+2026-09-27 18:59:52,620 - INFO - Feature extraction complete: 3840 samples (0 files failed).
+2026-09-27 18:59:52,655 - INFO - Cached train_aug features to C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\data\features\train_aug_features_v2.npz
+2026-09-27 18:59:52,657 - INFO - Extracting features for val set (240 files)...
+2026-09-27 19:00:00,107 - INFO -   Processed 50/240 files (0 failed, 50 samples so far)...
+2026-09-27 19:00:07,643 - INFO -   Processed 100/240 files (0 failed, 100 samples so far)...
+2026-09-27 19:00:15,550 - INFO -   Processed 150/240 files (0 failed, 150 samples so far)...
+2026-09-27 19:00:23,199 - INFO -   Processed 200/240 files (0 failed, 200 samples so far)...
+2026-09-27 19:00:29,601 - INFO -   Processed 240/240 files (0 failed, 240 samples so far)...
+2026-09-27 19:00:29,602 - INFO - Feature extraction complete: 240 samples (0 files failed).
+2026-09-27 19:00:29,626 - INFO - Cached val features to C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\data\features\val_features_v2.npz
+2026-09-27 19:00:29,627 - INFO - Extracting features for test set (240 files)...
+2026-09-27 19:00:37,832 - INFO -   Processed 50/240 files (0 failed, 50 samples so far)...
+2026-09-27 19:00:45,897 - INFO -   Processed 100/240 files (0 failed, 100 samples so far)...
+2026-09-27 19:00:54,361 - INFO -   Processed 150/240 files (0 failed, 150 samples so far)...
+2026-09-27 19:01:02,377 - INFO -   Processed 200/240 files (0 failed, 200 samples so far)...
+2026-09-27 19:01:08,827 - INFO -   Processed 240/240 files (0 failed, 240 samples so far)...
+2026-09-27 19:01:08,827 - INFO - Feature extraction complete: 240 samples (0 files failed).
+2026-09-27 19:01:08,854 - INFO - Cached test features to C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\data\features\test_features_v2.npz
+2026-09-27 19:01:08,854 - INFO - X_train shape: (3840, 560)
+2026-09-27 19:01:08,854 - INFO - X_val shape:   (240, 560)
+2026-09-27 19:01:08,854 - INFO - X_test shape:  (240, 560)
+2026-09-27 19:01:08,854 - INFO - 
+[STEP 4] Encoding emotion labels...
+2026-09-27 19:01:08,869 - INFO - Label classes: [np.str_('Angry'), np.str_('Calm'), np.str_('Disgust'), np.str_('Fearful'), np.str_('Happy'), np.str_('Neutral'), np.str_('Sad'), np.str_('Surprised')]
+2026-09-27 19:01:08,869 - INFO - 
+[STEP 5] Scaling features (StandardScaler)...
+2026-09-27 19:01:08,899 - INFO - 
+[STEP 6] Training and comparing models...
+2026-09-27 19:01:08,899 - INFO - 
+============================================================
+2026-09-27 19:01:08,899 - INFO - MODEL COMPARISON ON VALIDATION SET
+2026-09-27 19:01:08,899 - INFO - ============================================================
+2026-09-27 19:01:08,899 - INFO - 
+Training SVM_RBF_Tuned...
+2026-09-27 19:12:47,497 - INFO -   Best params: {'C': 50, 'gamma': 0.0005}
+2026-09-27 19:12:48,326 - INFO -   Accuracy:     0.4292  (42.9%)
+2026-09-27 19:12:48,327 - INFO -   Macro F1:     0.4025
+2026-09-27 19:12:48,327 - INFO -   Weighted F1:  0.4133
+2026-09-27 19:12:48,327 - INFO -   Train time:   698.6s
+2026-09-27 19:12:48,327 - INFO - 
+Training MLP_Deep...
+2026-09-27 19:15:52,864 - INFO -   Accuracy:     0.4500  (45.0%)
+2026-09-27 19:15:52,864 - INFO -   Macro F1:     0.4363
+2026-09-27 19:15:52,865 - INFO -   Weighted F1:  0.4480
+2026-09-27 19:15:52,865 - INFO -   Train time:   184.5s
+2026-09-27 19:15:52,865 - INFO - 
+Training MLP_Wide...
+2026-09-27 19:16:58,032 - INFO -   Accuracy:     0.5042  (50.4%)
+2026-09-27 19:16:58,033 - INFO -   Macro F1:     0.4928
+2026-09-27 19:16:58,033 - INFO -   Weighted F1:  0.4990
+2026-09-27 19:16:58,033 - INFO -   Train time:   65.1s
+2026-09-27 19:16:58,033 - INFO - 
+Training Random_Forest...
+2026-09-27 19:17:17,873 - INFO -   Accuracy:     0.4375  (43.8%)
+2026-09-27 19:17:17,874 - INFO -   Macro F1:     0.4008
+2026-09-27 19:17:17,874 - INFO -   Weighted F1:  0.4212
+2026-09-27 19:17:17,874 - INFO -   Train time:   19.6s
+2026-09-27 19:17:17,874 - INFO - 
+Training GradientBoost...
+2026-09-27 20:10:02,529 - INFO -   Accuracy:     0.4417  (44.2%)
+2026-09-27 20:10:02,530 - INFO -   Macro F1:     0.3910
+2026-09-27 20:10:02,530 - INFO -   Weighted F1:  0.4170
+2026-09-27 20:10:02,530 - INFO -   Train time:   3164.6s
+2026-09-27 20:10:02,531 - INFO - 
+Building Ensemble (soft-voting top models)...
+2026-09-27 20:23:45,701 - INFO -   Ensemble (MLP_Wide+MLP_Deep+SVM_RBF_Tuned):
+2026-09-27 20:23:45,702 - INFO -   Accuracy:    0.4583  (45.8%)
+2026-09-27 20:23:45,702 - INFO -   Macro F1:    0.4427
+2026-09-27 20:23:45,702 - INFO -   Train time:  822.7s
+2026-09-27 20:23:45,724 - INFO - 
+============================================================
+2026-09-27 20:23:45,724 - INFO - VALIDATION RESULTS (sorted by Macro F1):
+2026-09-27 20:23:45,743 - INFO -             Model  Accuracy  Macro_F1  Weighted_F1  Precision_W  Recall_W  Train_Time_s
+         MLP_Wide    0.5042    0.4928       0.4990       0.5123    0.5042          65.1
+Ensemble_SoftVote    0.4583    0.4427       0.4540       0.4772    0.4583         822.7
+         MLP_Deep    0.4500    0.4363       0.4480       0.4661    0.4500         184.5
+    SVM_RBF_Tuned    0.4292    0.4025       0.4133       0.4294    0.4292         698.6
+    Random_Forest    0.4375    0.4008       0.4212       0.4277    0.4375          19.6
+    GradientBoost    0.4417    0.3910       0.4170       0.4697    0.4417        3164.6
+2026-09-27 20:23:45,757 - INFO - Saved model comparison: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\results\model_comparison.csv
+2026-09-27 20:23:45,758 - INFO - 
+[STEP 7] Selecting best model based on validation Macro F1...
+2026-09-27 20:23:45,759 - INFO - Best model: MLP_Wide (Val Macro F1: 0.4928)
+2026-09-27 20:23:45,759 - INFO - 
+[STEP 8] Retraining best model on train + val data...
+2026-09-27 20:25:03,994 - INFO - Final model retrained on 4080 samples.
+2026-09-27 20:25:03,994 - INFO - 
+[STEP 9] Final evaluation on test set...
+2026-09-27 20:25:04,008 - INFO - 
+============================================================
+2026-09-27 20:25:04,009 - INFO - FINAL EVALUATION ON TEST SET
+2026-09-27 20:25:04,009 - INFO - ============================================================
+2026-09-27 20:25:04,030 - INFO - Test Accuracy:         0.5500 (55.0%)
+2026-09-27 20:25:04,031 - INFO - Macro F1-score:        0.5568
+2026-09-27 20:25:04,031 - INFO - Weighted F1-score:     0.5606
+2026-09-27 20:25:04,031 - INFO - Macro Precision:       0.5884
+2026-09-27 20:25:04,031 - INFO - Macro Recall:          0.5430
+2026-09-27 20:25:04,039 - INFO - 
+Classification Report:
+              precision    recall  f1-score   support
+
+       Angry       0.71      0.75      0.73        32
+        Calm       0.43      0.59      0.50        32
+     Disgust       0.59      0.41      0.48        32
+     Fearful       0.78      0.56      0.65        32
+       Happy       0.75      0.66      0.70        32
+     Neutral       0.58      0.44      0.50        16
+         Sad       0.22      0.31      0.26        32
+   Surprised       0.65      0.62      0.63        32
+
+    accuracy                           0.55       240
+   macro avg       0.59      0.54      0.56       240
+weighted avg       0.59      0.55      0.56       240
+
+2026-09-27 20:25:06,829 - INFO - Saved confusion matrix: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\results\confusion_matrix.png
+2026-09-27 20:25:06,829 - INFO - 
+[STEP 10] Saving model and artifacts...
+2026-09-27 20:25:06,838 - INFO - Saved model: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\models\speech_emotion_model.pkl
+2026-09-27 20:25:06,839 - INFO - Saved scaler: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\models\scaler.pkl
+2026-09-27 20:25:06,842 - INFO - Saved label encoder: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\models\label_encoder.pkl
+2026-09-27 20:25:06,854 - INFO - Saved metrics: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\results\metrics.json
+2026-09-27 20:25:06,856 - INFO - Saved metadata: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\models\model_metadata.json
+2026-09-27 20:25:06,856 - INFO - 
+============================================================
+2026-09-27 20:25:06,856 - INFO - ✅ TRAINING COMPLETE!
+2026-09-27 20:25:06,856 - INFO - ============================================================
+2026-09-27 20:25:06,857 - INFO - Best model:      MLP_Wide
+2026-09-27 20:25:06,857 - INFO - Test Accuracy:   0.5500 (55.0%)
+2026-09-27 20:25:06,857 - INFO - Macro F1:        0.5568
+2026-09-27 20:25:06,857 - INFO - Weighted F1:     0.5606
+2026-09-27 20:25:06,857 - INFO - 
+Files saved in: C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\models
+2026-09-27 20:25:06,857 - INFO - Results in:     C:\Users\siva\OneDrive\Desktop\ML SER\speech-emotion-detection\results
+2026-09-27 20:25:06,857 - INFO - 
+You can now start the backend: python backend/main.py

@@ -1,0 +1,32 @@
+{
+  "total_files": 1440,
+  "n_speakers": 24,
+  "emotions": [
+    "Angry",
+    "Calm",
+    "Disgust",
+    "Fearful",
+    "Happy",
+    "Neutral",
+    "Sad",
+    "Surprised"
+  ],
+  "samples_per_emotion": {
+    "Calm": 192,
+    "Happy": 192,
+    "Sad": 192,
+    "Angry": 192,
+    "Fearful": 192,
+    "Disgust": 192,
+    "Surprised": 192,
+    "Neutral": 96
+  },
+  "duration_stats_seconds": {
+    "mean": 3.7006648148148145,
+    "std": 0.33667563193231065,
+    "min": 2.9362708333333334,
+    "max": 5.2719375,
+    "median": 3.6703333333333332
+  },
+  "imbalance_ratio": 2.0
+}

@@ -1,0 +1,24 @@
+{
+  "model_type": "MLP_Wide",
+  "dataset": "RAVDESS",
+  "dataset_url": "https://zenodo.org/record/1188976",
+  "feature_type": "MFCC+Delta+ZCR+RMS+Centroid+Rolloff+Chroma",
+  "feature_dimension": 560,
+  "emotion_classes": [
+    "Angry",
+    "Calm",
+    "Disgust",
+    "Fearful",
+    "Happy",
+    "Neutral",
+    "Sad",
+    "Surprised"
+  ],
+  "n_emotions": 8,
+  "random_seed": 42,
+  "training_date": "2026-09-27T20:25:06.855172",
+  "test_accuracy": 0.55,
+  "macro_f1": 0.5568,
+  "train_samples": 4080,
+  "test_samples": 240
+}

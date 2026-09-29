@@ -1,0 +1,10 @@
+{
+  "mfcc": true,
+  "mfcc_delta": true,
+  "mel_spectrogram": false,
+  "zero_crossing_rate": true,
+  "rms_energy": true,
+  "spectral_centroid": true,
+  "spectral_rolloff": true,
+  "chroma": true
+}

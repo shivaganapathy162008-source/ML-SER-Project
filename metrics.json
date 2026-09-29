@@ -1,0 +1,80 @@
+{
+  "test_accuracy": 0.55,
+  "macro_f1": 0.5568,
+  "weighted_f1": 0.5606,
+  "macro_precision": 0.5884,
+  "macro_recall": 0.543,
+  "n_test_samples": 240,
+  "model_name": "MLP_Wide",
+  "dataset": "RAVDESS",
+  "n_emotions": 8,
+  "emotion_classes": [
+    "Angry",
+    "Calm",
+    "Disgust",
+    "Fearful",
+    "Happy",
+    "Neutral",
+    "Sad",
+    "Surprised"
+  ],
+  "feature_dimension": 560,
+  "train_samples": 4080,
+  "test_samples": 240,
+  "model_comparison": [
+    {
+      "Model": "MLP_Wide",
+      "Accuracy": 0.5042,
+      "Macro_F1": 0.4928,
+      "Weighted_F1": 0.499,
+      "Precision_W": 0.5123,
+      "Recall_W": 0.5042,
+      "Train_Time_s": 65.1
+    },
+    {
+      "Model": "Ensemble_SoftVote",
+      "Accuracy": 0.4583,
+      "Macro_F1": 0.4427,
+      "Weighted_F1": 0.454,
+      "Precision_W": 0.4772,
+      "Recall_W": 0.4583,
+      "Train_Time_s": 822.7
+    },
+    {
+      "Model": "MLP_Deep",
+      "Accuracy": 0.45,
+      "Macro_F1": 0.4363,
+      "Weighted_F1": 0.448,
+      "Precision_W": 0.4661,
+      "Recall_W": 0.45,
+      "Train_Time_s": 184.5
+    },
+    {
+      "Model": "SVM_RBF_Tuned",
+      "Accuracy": 0.4292,
+      "Macro_F1": 0.4025,
+      "Weighted_F1": 0.4133,
+      "Precision_W": 0.4294,
+      "Recall_W": 0.4292,
+      "Train_Time_s": 698.6
+    },
+    {
+      "Model": "Random_Forest",
+      "Accuracy": 0.4375,
+      "Macro_F1": 0.4008,
+      "Weighted_F1": 0.4212,
+      "Precision_W": 0.4277,
+      "Recall_W": 0.4375,
+      "Train_Time_s": 19.6
+    },
+    {
+      "Model": "GradientBoost",
+      "Accuracy": 0.4417,
+      "Macro_F1": 0.391,
+      "Weighted_F1": 0.417,
+      "Precision_W": 0.4697,
+      "Recall_W": 0.4417,
+      "Train_Time_s": 3164.6
+    }
+  ]
+}

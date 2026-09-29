@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎙️ Speech Emotion Detection | AI Voice Analysis</title>
+  <meta name="description" content="Detect human emotions from your voice using AI and machine learning. Real-time speech emotion recognition powered by MFCC features and SVM classifier." />
+  <meta name="keywords" content="speech emotion recognition, voice analysis, AI, machine learning, emotion detection" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════════════════════════ -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🎙️</span>
+        <div class="logo-text">
+          <span class="logo-title">Speech Emotion Detection</span>
+          <span class="logo-sub">Powered by Machine Learning</span>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <a href="#recorder" class="nav-link active" id="nav-recorder">Record</a>
+        <a href="#history" class="nav-link" id="nav-history">History</a>
+        <a href="#about" class="nav-link" id="nav-about">About</a>
+      </nav>
+      <div class="model-badge" id="modelBadge">
+        <span class="badge-dot"></span>
+        <span id="modelStatus">Connecting...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HERO / RECORDER SECTION
+  ═══════════════════════════════════════════════════════════════ -->
+  <main>
+    <section class="hero" id="recorder">
+      <div class="hero-text">
+        <h1 class="hero-title">Speak. We'll detect the emotion.</h1>
+        <p class="hero-subtitle">Speak naturally and let AI analyze the emotion in your voice.</p>
+      </div>
+
+      <!-- ── Recorder Card ── -->
+      <div class="recorder-card" id="recorderCard">
+
+        <!-- State: Idle -->
+        <div class="record-state" id="stateIdle">
+          <div class="mic-container" id="micContainer">
+            <button class="mic-btn" id="startBtn" title="Start Recording" aria-label="Start Recording">
+              <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 1a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+            <div class="mic-rings">
+              <div class="ring ring-1"></div>
+              <div class="ring ring-2"></div>
+              <div class="ring ring-3"></div>
+            </div>
+          </div>
+          <p class="record-hint">Click the microphone and speak</p>
+          <p class="record-sub">Recommended: speak 2–5 seconds</p>
+        </div>
+
+        <!-- State: Recording -->
+        <div class="record-state hidden" id="stateRecording">
+          <div class="recording-indicator">
+            <div class="rec-dot"></div>
+            <span class="rec-label">Recording...</span>
+          </div>
+          <div class="timer" id="recordTimer">00:00</div>
+          <div class="waveform" id="waveform" aria-hidden="true">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <button class="stop-btn" id="stopBtn" aria-label="Stop Recording">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <rect x="6" y="6" width="12" height="12" rx="2"/>
+            </svg>
+            Stop Recording
+          </button>
+        </div>
+
+        <!-- State: Processing -->
+        <div class="record-state hidden" id="stateProcessing">
+          <div class="processing-spinner">
+            <div class="spinner-ring"></div>
+            <span class="spinner-icon">🧠</span>
+          </div>
+          <p class="processing-text">Analyzing your voice...</p>
+          <p class="processing-sub">Extracting MFCC features &amp; running the ML model</p>
+        </div>
+
+        <!-- State: Error -->
+        <div class="record-state hidden" id="stateError">
+          <div class="error-icon">⚠️</div>
+          <p class="error-title" id="errorTitle">Something went wrong</p>
+          <p class="error-message" id="errorMessage">Please try again.</p>
+          <button class="retry-btn" id="retryBtn">Try Again</button>
+        </div>
+
+        <!-- State: Result -->
+        <div class="record-state hidden" id="stateResult">
+          <div class="result-emotion-display">
+            <div class="emotion-icon-big" id="resultEmoji">😊</div>
+            <div class="emotion-label" id="resultEmotion">HAPPY</div>
+            <div class="confidence-row">
+              <span class="conf-label">Confidence</span>
+              <div class="conf-bar-wrap">
+                <div class="conf-bar" id="confBar"></div>
+              </div>
+              <span class="conf-value" id="confValue">87%</span>
+            </div>
+          </div>
+
+          <!-- Emotion Probability Bars -->
+          <div class="prob-section">
+            <h3 class="prob-title">Emotion Analysis</h3>
+            <div class="prob-bars" id="probBars">
+              <!-- Filled dynamically by JavaScript -->
+            </div>
+          </div>
+
+          <button class="record-again-btn" id="recordAgainBtn">
+            🎙️ Record Again
+          </button>
+        </div>
+
+      </div><!-- /recorder-card -->
+
+      <!-- Privacy Note -->
+      <p class="privacy-note" id="privacyNote">
+        🔒 The microphone is used <strong>only</strong> when you start recording. Audio is sent to the application 
+        for emotion prediction and is <strong>not permanently stored</strong>.
+      </p>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         HISTORY SECTION
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="history">
+      <div class="section-header">
+        <h2 class="section-title">Recent Predictions</h2>
+        <button class="clear-btn" id="clearHistoryBtn">Clear History</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="history-empty" id="historyEmpty">
+          <span class="history-empty-icon">🗂️</span>
+          <p>No predictions yet. Record your voice to get started!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         ABOUT SECTION
+    ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="about">
+      <h2 class="section-title">About This System</h2>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>🧠 What is Speech Emotion Recognition?</h3>
+          <p>
+            Speech Emotion Recognition (SER) is the process of automatically identifying
+            a human's emotional state from their speech signal. The voice carries rich
+            information beyond words — pitch, rhythm, energy, and tone all reflect
+            emotional states like happiness, anger, sadness, and more.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <h3>📊 What is MFCC?</h3>
+          <p>
+            <strong>Mel Frequency Cepstral Coefficients (MFCCs)</strong> are the primary
+            feature for speech processing. They represent how the human ear perceives
+            different frequencies (logarithmic mel scale). MFCCs capture the vocal tract
+            shape that differs between emotional states — making them perfect for SER.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pipeline -->
+      <div class="pipeline-card">
+        <h3 class="pipeline-title">How It Works</h3>
+        <div class="pipeline">
+          <div class="pipeline-step">
+            <div class="pipe-icon">🎤</div>
+            <div class="pipe-label">Voice Input</div>
+            <div class="pipe-desc">Browser microphone captures your speech</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="pipe-icon">🔊</div>
+            <div class="pipe-label">Audio Processing</div>
+            <div class="pipe-desc">Mono conversion, resampling to 22050 Hz, normalization</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="pipe-icon">📊</div>
+            <div class="pipe-label">Feature Extraction</div>
+            <div class="pipe-desc">MFCC, Delta-MFCC, ZCR, RMS, Spectral features (192 values)</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="pipe-icon">🤖</div>
+            <div class="pipe-label">ML Model</div>
+            <div class="pipe-desc">Trained SVM/Random Forest on RAVDESS dataset</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="pipe-icon">🧠</div>
+            <div class="pipe-label">Classification</div>
+            <div class="pipe-desc">8-class emotion prediction with confidence scores</div>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="pipe-icon">📱</div>
+            <div class="pipe-label">Result</div>
+            <div class="pipe-desc">Emotion label + probability visualization</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Table -->
+      <div class="feature-table-card">
+        <h3>Audio Features Used</h3>
+        <div class="table-scroll">
+          <table class="feature-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Dimension</th>
+                <th>What it captures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>MFCC (40 coefficients)</td><td>80</td><td>Vocal tract shape — primary SER feature</td></tr>
+              <tr><td>MFCC Delta</td><td>80</td><td>Rate of change — speech dynamics</td></tr>
+              <tr><td>Zero Crossing Rate</td><td>2</td><td>Noisiness / voiced vs. unvoiced segments</td></tr>
+              <tr><td>RMS Energy</td><td>2</td><td>Loudness — linked to emotional intensity</td></tr>
+              <tr><td>Spectral Centroid</td><td>2</td><td>"Brightness" of sound</td></tr>
+              <tr><td>Spectral Rolloff</td><td>2</td><td>Tonal characteristic of speech</td></tr>
+              <tr><td>Chroma</td><td>24</td><td>Pitch class energy — tonal content</td></tr>
+              <tr class="total-row"><td><strong>Total</strong></td><td><strong>192</strong></td><td>Fixed-size feature vector</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Emotions -->
+      <div class="emotions-card">
+        <h3>Supported Emotions (RAVDESS Dataset)</h3>
+        <div class="emotions-grid" id="emotionsGrid">
+          <!-- Filled by JS after loading model info -->
+        </div>
+      </div>
+
+      <!-- Limitations -->
+      <div class="about-card limitations-card">
+        <h3>⚠️ Limitations &amp; Disclaimer</h3>
+        <ul>
+          <li>Emotion recognition from voice is <strong>probabilistic</strong>, not certain.</li>
+          <li>Background noise can significantly affect prediction accuracy.</li>
+          <li>The model was trained on RAVDESS (English, professional actors) — it may not generalize to all accents, languages, or speaking styles.</li>
+          <li>Short recordings (&lt; 2 seconds) may yield less reliable predictions.</li>
+          <li>This system detects <strong>expressed speech emotion</strong>, not true psychological state.</li>
+          <li>Microphone quality affects audio quality and therefore prediction accuracy.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>🎙️ Speech Emotion Detection | RAVDESS Dataset | Built with FastAPI + scikit-learn</p>
+    <p class="footer-sub">B.E. Computer Science Project | Machine Learning System</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

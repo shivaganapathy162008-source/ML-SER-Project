@@ -1,0 +1,20 @@
+SPEECH EMOTION DETECTION — Classification Report
+============================================================
+Test Accuracy:    0.5500
+Macro F1:         0.5568
+Weighted F1:      0.5606
+
+              precision    recall  f1-score   support
+
+       Angry       0.71      0.75      0.73        32
+        Calm       0.43      0.59      0.50        32
+     Disgust       0.59      0.41      0.48        32
+     Fearful       0.78      0.56      0.65        32
+       Happy       0.75      0.66      0.70        32
+     Neutral       0.58      0.44      0.50        16
+         Sad       0.22      0.31      0.26        32
+   Surprised       0.65      0.62      0.63        32
+
+    accuracy                           0.55       240
+   macro avg       0.59      0.54      0.56       240
+weighted avg       0.59      0.55      0.56       240
